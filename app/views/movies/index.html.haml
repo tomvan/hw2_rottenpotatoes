@@ -2,6 +2,12 @@
 %h1 All Movies
 
 %table#movies
+  = form_tag movies_path, :id => "ratings_form", :method => :get do
+    include:
+    - @all_ratings.each do |rating|
+      = rating
+      = check_box_tag "ratings[#{rating}]", 1, @ratings.include?(rating)
+    = submit_tag 'Refresh', :id => "ratings_submit"
   %thead
     %tr
       %th{:class => @sort=="movies.title" ? "hilite" : false}= link_to "Movie Title", movies_path({:sort => "movies.title"}), :id => "title_header"
