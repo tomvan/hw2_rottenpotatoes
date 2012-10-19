@@ -20,6 +20,10 @@ class MoviesController < ApplicationController
     flash[:ratings] = @ratings
     end
     @sort = params[:sort]
+    if @sort.nil?
+    @sort = flash[:sort]
+    end
+    flash[:sort] = @sort
     @movies = Movie.order(@sort).where(:rating => @ratings)
 #@movies = Movie.all(:order => @sort)
   end
